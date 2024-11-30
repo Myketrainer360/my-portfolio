@@ -1,0 +1,80 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { 
+  title, 
+  description = "Web Developer Portfolio" 
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="stylesheet" href="/global.css">
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 text-gray-900 font-sans antialiased">
+  <header class="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
+    <nav class="container mx-auto flex justify-between items-center py-4 px-4 lg:px-8">
+      <div class="text-2xl font-bold text-gray-800">
+        Your Name
+      </div>
+      <div class="hidden md:flex space-x-6">
+        <a href="#home" class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+        <a href="#projects" class="text-gray-600 hover:text-blue-600 transition-colors">Projects</a>
+        <a href="#about" class="text-gray-600 hover:text-blue-600 transition-colors">About</a>
+        <a href="#contact" class="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-all">Contact</a>
+      </div>
+      <button class="md:hidden text-gray-800 focus:outline-none" id="mobile-menu-toggle">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </nav>
+  </header>
+
+  <main class="container mx-auto px-4 lg:px-8 pt-24">
+    <slot />
+  </main>
+  
+  <footer class="bg-gray-800 text-white py-12 mt-12">
+    <div class="container mx-auto px-4 lg:px-8 grid md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-xl font-bold mb-4">Your Name</h3>
+        <p class="text-gray-400">Web Developer & Designer</p>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4">Quick Links</h4>
+        <nav class="space-y-2">
+          <a href="#home" class="text-gray-300 hover:text-white">Home</a>
+          <a href="#projects" class="text-gray-300 hover:text-white">Projects</a>
+          <a href="#about" class="text-gray-300 hover:text-white">About</a>
+        </nav>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4">Connect</h4>
+        <div class="flex space-x-4">
+          <a href="#" class="text-gray-300 hover:text-white">GitHub</a>
+          <a href="#" class="text-gray-300 hover:text-white">LinkedIn</a>
+          <a href="#" class="text-gray-300 hover:text-white">Twitter</a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center text-gray-500 mt-8">
+      © {new Date().getFullYear()} Your Name. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('mobile-menu-toggle')?.addEventListener('click', () => {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu?.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

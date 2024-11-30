@@ -1,0 +1,64 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  technologies: string[];
+  imageUrl?: string;
+  projectLink?: string;
+  githubLink?: string;
+}
+
+const { 
+  title, 
+  description, 
+  technologies, 
+  imageUrl = '/placeholder.jpg',
+  projectLink = '#',
+  githubLink = '#'
+} = Astro.props;
+---
+<div class="group relative overflow-hidden rounded-2xl shadow-lg transition-all duration-300 hover:shadow-xl">
+  <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-75 transition-opacity duration-300"></div>
+  
+  <div class="relative grid md:grid-cols-2 gap-6 p-6 bg-white">
+    <div class="overflow-hidden rounded-xl">
+      <img 
+        src={imageUrl} 
+        alt={`${title} project preview`} 
+        class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+      />
+    </div>
+    
+    <div class="flex flex-col justify-between">
+      <div>
+        <h2 class="text-3xl font-bold text-gray-800 mb-4 group-hover:text-white transition-colors">{title}</h2>
+        <p class="text-gray-600 mb-4 group-hover:text-gray-100 transition-colors">{description}</p>
+        
+        <div class="flex flex-wrap gap-2 mb-6">
+          {technologies.map((tech) => (
+            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm group-hover:bg-white/20 group-hover:text-white transition-all">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+      
+      <div class="flex space-x-4">
+        <a 
+          href={projectLink} 
+          target="_blank" 
+          class="px-6 py-3 border-2 border-blue-500 text-blue-500 rounded-full hover:bg-blue-500 hover:text-white transition-all group-hover:border-white group-hover:text-white"
+        >
+          View Project
+        </a>
+        <a 
+          href={githubLink} 
+          target="_blank" 
+          class="px-6 py-3 border-2 border-gray-700 text-gray-700 rounded-full hover:bg-gray-700 hover:text-white transition-all group-hover:border-white group-hover:text-white"
+        >
+          GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
